@@ -1,0 +1,44 @@
+.photo{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background-size: 150px;
+}
+p{
+    font-family: cursive;
+}
+
+.left{
+    float: left;
+}
+.right{
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: end;
+}
+.close{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+.prix{
+    color: rgb(117, 117, 117);
+    
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.number{
+    max-width: 100px;
+    height: 100%;
+    min-height: 30px;
+    text-align: center;
+    border-radius: 10px;
+    border:none;
+
+}
