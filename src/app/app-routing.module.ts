@@ -11,7 +11,7 @@ import { RestaurantComponent } from './restaurant/restaurant.component';
 
 const routes: Routes = [
   {
-    path:"login",
+    path:"/login",
     component:LoginComponent
   },
   {
