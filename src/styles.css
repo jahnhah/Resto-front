@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+
+.card{
+    border: none !important;
+}
+
+.btn-primary{
+    background-color: cadetblue !important;
+    border: cadetblue!important;
+}
+
+.btn-primary:focus{
+    background-color: cornflowerblue !important;
+    border: cornflowerblue!important;
+    outline:cadetblue!important;
+}
+.primary{
+    color: cadetblue;
+}
+p,h1,h2,h3,h4,.btn{
+    font-family: cursive!important;
+}
+
+@keyframes logo_anim {
+    
+    0%{
+        transform:translate(-50%,10px)
+    }
+    50%{
+        transform: translate(-50%,-10px);
+    }
+    100%{
+        transform: translate(-50%,10px);
+    }
+}

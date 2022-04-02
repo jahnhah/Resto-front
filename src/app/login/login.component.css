@@ -1,0 +1,78 @@
+.fh-container{
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: container_anim 20s infinite;
+    object-fit:cover;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.centered{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card{
+    border-radius: 10px;
+    border: none;
+}
+
+.logo{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: logo_anim 5s linear infinite;
+}
+
+.rounded-input{
+    border-radius: 10px;
+}
+
+.shadows{
+    box-shadow: 0px 10px 20px 5px black, inset 0px 0px 10px 2px black;
+}
+
+@keyframes logo_anim {
+    
+    0%{
+        transform:translate(-50%,10px)
+    }
+    50%{
+        transform: translate(-50%,-10px);
+    }
+    100%{
+        transform: translate(-50%,10px);
+    }
+}
+
+.error{
+    color: red;
+}
+
+@keyframes container_anim {
+    0%{
+        background-image: url('../../assets/bg1.jpg');
+        
+    }
+    25%{
+        background-image: url('../../assets/bg2.jpg');
+        
+    }
+    50%{
+        background-image: url('../../assets/bg3.jpg');
+    }
+    75%{
+        background-image: url('../../assets/bg4.jpg');
+        
+    }
+    100%{
+        background-image: url('../../assets/bg1.jpg');
+    }
+
+}

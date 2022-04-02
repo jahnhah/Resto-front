@@ -1,0 +1,9 @@
+.photo{
+    width: 100px;
+    border-radius: 100%;
+}
+.nom{
+    font-size: 30px;
+    font-family:cursive;
+    color: rgb(116, 116, 116);
+}

@@ -1,0 +1,19 @@
+<div class="container-fluid fh-container">
+    <div class="row card py-3 px-5 login-card shadows" style="height: 100%;">
+        <div class="card-body">
+          <img src="../../assets/logo.png" class="logo">
+            <form class="centered">
+                <div class="form-group my-3 center">
+                  <input [(ngModel)]="logins.email" name="email" type="email" class="form-control rounded-input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Votre email">
+                </div>
+                <div class="form-group my-3">
+                  <input [(ngModel)]="logins.pwd" name="pwd" type="password" class="form-control rounded-input" id="exampleInputPassword1" placeholder="Mot de passe">
+                </div>
+                <div class="form-group my-3">
+                  <p class="error text-center" *ngIf="error">*L'authentification a échoué</p>
+                </div>
+                <button type="submit" class="btn btn-primary" (click)="login()">Se connecter</button>
+            </form>
+        </div>
+    </div>
+</div>
