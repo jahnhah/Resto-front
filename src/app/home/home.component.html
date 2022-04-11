@@ -1,49 +1,73 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
   <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse text-center" id="navbarTogglerDemo01">
-      <a class="navbar-brand my-1" href="#"><img src="../../assets/logo.png" class="my-2 logo" width="50px"></a>
+      <a class="navbar-brand my-1" [routerLink]="['/']"><img src="../../assets/logo.png" class="my-2 logo"
+          width="50px"></a>
       <ul class="navbar-nav my-1 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">home</a>
+          <a class="nav-link" [routerLink]="['/login']">login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">shop</a>
+          <a class="nav-link" [routerLink]="['/register']">register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/panier']">panier</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/commandes']">commandes</a>
         </li>
       </ul>
       <form class="my-1 me-auto mx-auto text-center">
         <div class="input-group group shadow">
-          <input type="text" class="form-control search" aria-label="Amount (to the nearest dollar)">
-          <button class="input-group-text search-append">chercher</button>
+          <input type="text" class="form-control search" name="search" [(ngModel)]="nom"
+            aria-label="Amount (to the nearest dollar)">
+          <button class="input-group-text search-append" (click)="search()">chercher</button>
         </div>
       </form>
-      <img src="../../assets/bg1.jpg" class="photo my-1">
+      <img src="../../assets/bg1.jpg" style="cursor: pointer;" class="photo my-1" (click)="logout()">
     </div>
   </div>
 </nav>
 <div class="container-fluid">
   <div class="row mt-5">
-    <ngb-carousel 
-    [showNavigationIndicators]="false" 
-    [showNavigationArrows]="false"
-    [interval]="2000">
+    <ngb-carousel *ngIf="screenWidth>800" [showNavigationIndicators]="false" [showNavigationArrows]="false"
+      [interval]="2000">
       <ng-template ngbSlide *ngFor="let s of slides">
         <div class="row mb-5">
-          <div class="col-3" *ngFor="let d of s.data">
-            <app-restaurant ></app-restaurant>
+          <div class="col-3 p4" *ngFor="let d of s.data">
+            <app-restaurant [restaurant]="d" (showEvent)="navigateTo(d._id)"></app-restaurant>
           </div>
         </div>
       </ng-template>
     </ngb-carousel>
+    <div *ngIf="screenWidth<800">
+      <div class="my-5" *ngFor="let r of restaurants">
+        <app-restaurant [restaurant]="r" (showEvent)="navigateTo(r._id)">
+        </app-restaurant>
+      </div>
+
+    </div>
   </div>
   <div class="row text-center">
     <h1 class="primary inter-text">top menus!!</h1>
   </div>
   <div class="row mt-5">
-    <app-plat *ngFor="let t of tab"></app-plat>
+    <app-plat *ngFor="let p of plats" [plat]="p" [show_restaurant]="true" [icon]="'buy'"></app-plat>
   </div>
-  
-
 </div>
+
+<app-footer></app-footer>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Pho resto</h4>
+    <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <app-plat *ngFor="let p of plats" [plat]="p" [show_restaurant]="true" [icon]="'buy'"></app-plat>
+  </div>
+</ng-template>

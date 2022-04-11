@@ -1,34 +1,54 @@
-
+<app-navbar [search]="false"></app-navbar>
 <div class="container-fluid">
-    <div class="row">
+    <div class="row mt-5">
+        <h1 *ngIf="!paniers ||paniers.length<1" class="text-center"> Panier vide</h1>
         <!-- eto le component -->
-        <div class="card mb-3" *ngFor="let t of tab">
+        <div class="card mb-3" *ngFor="let t of paniers; let i=index">
             <div class="card-body shadow">
                 <div class="row">
                     <div class="col-3">
                         <div style="background-image: url('../../assets/bg1.jpg');" class="photo shadow-lg"></div>
-                        
+
                     </div>
                     <div class="col-6 middle text-center">
-                        <h4>Hamburger</h4>
+                        <h4>{{t.nom}}</h4>
                         <div class="input-group mb-3 text-center" style="justify-content: center;">
-                            <input type="number" class="number shadow my-3">
+                            <input type="number" [(ngModel)]="input[i]" [name]="name[i]" class="number shadow my-3"
+                                [value]="t.nb">
                         </div>
                     </div>
                     <div class="col-3 h-100">
                         <div class="right d-inline">
-                            <button class="btn btn-primary close">X</button>
-                            <p class="my-3">Ar 3000</p>
+                            <button class="btn btn-primary close" (click)="removeFromPanier(t._id)">X</button>
+                            <p class="my-3">{{t.prix}} Ar</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row text-center">
+    <div class="row text-center my-5" *ngIf="paniers && paniers.length>0">
         <div class="col">
-            <button type="button" class="btn btn-primary">Commander</button>
+            <button type="button" class="btn btn-primary mx-1" (click)="sauvegarder()">Sauvegarder</button>
+            <button type="button" class="btn btn-primary mx-1" (click)="open(content)">Commander</button>
         </div>
-        
+
     </div>
 </div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Date de livraison</h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <input type="datetime-local" name="date" class="form-control" [(ngModel)]="date">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" (click)="commander()">Commander</button>
+    </div>
+</ng-template>

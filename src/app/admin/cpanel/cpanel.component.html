@@ -1,38 +1,92 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse text-center" id="navbarTogglerDemo01">
-        <a class="navbar-brand my-1" href="#"><img src="../../assets/logo.png" class="my-2 logo" width="50px"></a>
-        <ul class="navbar-nav my-1 mb-lg-0  me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Commandes</a>
-          </li>
-        </ul>
-        
-        <img src="../../assets/bg1.jpg" class="photo my-1">
-      </div>
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse text-center" id="navbarTogglerDemo01">
+      <a class="navbar-brand my-1" href="#"><img src="../../assets/logo.png" class="my-2 logo" width="50px"></a>
+      <ul class="navbar-nav my-1 mb-lg-0  me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Commandes</a>
+        </li>
+      </ul>
+
+      <img src="../../assets/bg1.jpg" class="photo my-1">
     </div>
+  </div>
 </nav>
 <div class="container-fluid">
-    <div class="row mt-5">
-        <div class="col-md-6 mb-4">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h1>Graph</h1>
-                </div>
-            </div>
+  <div class="row mt-5">
+    <div class="col-md-9 mb-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <app-graph></app-graph>
         </div>
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h1>Graph</h1>
-                </div>
+      </div>
+    </div>
+    <div class="col-md-3 h-100">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <select name="restaurant" class="form-control" [(ngModel)]="restaurant" (change)="restoEvent()">
+                <option *ngFor="let r of restaurants" [value]="r._id">{{ r.nom }}</option>
+              </select>
             </div>
-        </div>  
+            <div class="form-group mt-3">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Mois</span>
+                </div>
+                <input type="month" name="date" [(ngModel)]="date" class="form-control" (change)="dateEvent()">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="row mt-3">
-        <app-commandes *ngFor="let c of tab"></app-commandes>
-    </div>
+  </div>
+  <div class="row mt-3">
+    <app-commandes [label]="'livrer'" [commande]="c" *ngFor="let c of commandes" (newItemEvent)="addDeliver(c)">
+    </app-commandes>
+  </div>
 </div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" (newItemEvent)="open(content)">Livrer</h4>
+    <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="ng-autocomplete">
+        <label for="livreur" class="mb-2">Livreur</label>
+        <ng-autocomplete id="livreur" [data]="livreurs" [searchKeyword]="keyword" (selected)='selectEvent($event)'
+          [itemTemplate]="itemTemplate">
+        </ng-autocomplete>
+
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.nom"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+      </div>
+    </form>
+    <div class="row mt-3 detail mx-auto shadow" *ngFor="let c of toDeliver">
+      <div class="col-4 text-center">
+        <p style="float:left">{{ c.utilisateur.nom }}</p>
+      </div>
+      <div class="col-4 me-auto  text-center">
+        <p class="text-center">{{ c.plats.length }}</p>
+      </div>
+      <div class="col-4  text-center" (click)="removeDeliver(c._id)"><img src="../../../assets/cancel.png" width="30px"
+          style="cursor: pointer; float:right"></div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="save()">OK</button>
+  </div>
+</ng-template>

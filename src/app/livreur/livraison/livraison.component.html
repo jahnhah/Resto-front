@@ -1,0 +1,18 @@
+<app-navbar [search]="false"></app-navbar>
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-md-9 mb-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <app-graph></app-graph>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <app-commandes [label]="'livrer'" [commande]="c" *ngFor="let c of commandes" (newItemEvent)="updateState(c)"
+            [label]="'Livré'">
+        </app-commandes>
+    </div>
+</div>

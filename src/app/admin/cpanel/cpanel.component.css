@@ -11,3 +11,25 @@
     border-radius: 100%;
     float: right;
 }
+
+.ng-autocomplete{
+    width: 100%!important;
+    border: none!important;
+}
+
+.autocomplete-container{
+    box-shadow: none!important;
+    border: 1px solid rgba(0,0,0,.2)!important;
+    border-radius: 0.3rem!important;
+}
+
+.close{
+    width:20px;
+    height: 20px;
+    border-radius: 100%;
+}
+
+.detail{
+    border-radius: 10px;
+    background-color: #f8f9fa;
+}

@@ -1,24 +1,58 @@
-.photo{
+.photo {
     width: 100px;
     height: 100px;
     border-radius: 100%;
     background-size: 150px;
 }
-p{
+
+p {
     font-family: cursive;
 }
 
-.left{
+.left {
     float: left;
 }
-.right{
+
+.right {
     float: right;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.prix{
+.prix {
     color: rgb(117, 117, 117);
-    
+
+}
+
+.down {
+    cursor: pointer;
+}
+
+.list-group-item {
+    border: none !important;
+    background: none !important;
+}
+
+.open {
+    transition: opacity 600ms, visibility 600ms;
+}
+
+.close {
+    display: none;
+}
+
+.image-mini {
+    width: 60px;
+    height: 60px;
+    background-size: 70px;
+}
+
+.down-mini {
+    width: 20px;
+    height: 20px;
+}
+
+.text-mini {
+    font-size: 12px !important;
 }
