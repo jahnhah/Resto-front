@@ -1,32 +1,31 @@
-.fh-container{
+.fh-container {
     height: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     animation: container_anim 20s infinite;
-    object-fit:cover;
+    object-fit: cover;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.centered{
+.centered {
     display: grid;
     justify-content: center;
     align-items: center;
 }
 
-@media screen {
-    
-}
-.login-card{
+@media screen {}
+
+.login-card {
     border-radius: 10px;
     border: none;
     min-width: 350px;
     min-height: 430px;
 }
 
-.logo{
+.logo {
     width: 100px;
     height: 100px;
     position: relative;
@@ -35,65 +34,58 @@
     left: 50%;
     transform: translateX(-50%);
 }
-.action-button{
+
+.action-button {
     width: 50px;
     height: 50px;
     cursor: pointer;
 }
 
-.grow{
+.grow {
     width: 60px;
     box-shadow: 0px 13px 14px -16px #0d6efd;
 }
 
-.rounded-input{
+.rounded-input {
     border-radius: 10px;
 }
 
-.shadows{
+.shadows {
     box-shadow: 0px 10px 20px 5px black, inset 0px 0px 10px 2px black;
 }
 
-.hide{
+.hide {
     display: none;
 }
 
-.type{
-    cursor:pointer;
+.type {
+    cursor: pointer;
 }
-.type:hover{
+
+.type:hover {
     width: 70px;
 }
 
-.group-input{
+.group-input {
     min-height: 200px;
 }
-.bottom-button{
-}
 
-.error{
+.bottom-button {}
+
+.error {
     color: red;
 }
 
 
 @keyframes container_anim {
-    0%{
+    0% {
         background-image: url('../../assets/bg1.jpg');
-        
+
     }
-    25%{
+
+    100% {
         background-image: url('../../assets/bg2.jpg');
-        
-    }
-    50%{
-        background-image: url('../../assets/bg3.jpg');
-    }
-    75%{
-        background-image: url('../../assets/bg4.jpg');
-        
-    }
-    100%{
-        background-image: url('../../assets/bg1.jpg');
+
     }
 
 }

@@ -1,0 +1,40 @@
+footer {
+    background-color: cadetblue;
+    color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.search {
+    border-radius: 10px 0px 0px 10px;
+    border: none;
+}
+
+.search:focus {
+    box-shadow: none !important;
+
+}
+
+.search-append {
+    border-radius: 0px 10px 10px 0px;
+    background-color: cornflowerblue !important;
+    border: none;
+    color: white;
+}
+
+.search-append:focus {
+    box-shadow: none !important;
+    background-color: cornflowerblue !important;
+
+
+}
+
+.group {
+    border-radius: 10px 10px 10px 10px;
+    max-width: 30%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

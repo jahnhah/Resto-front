@@ -1,0 +1,6 @@
+<app-navbar [search]="false"></app-navbar>
+<div class="container-fluid">
+    <div class="row mt-5">
+        <app-plat *ngFor="let p of plats" [plat]="p" [show_restaurant]="true" [icon]="'buy'"></app-plat>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-commandes',
@@ -6,10 +6,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./commandes.component.css']
 })
 export class CommandesComponent implements OnInit {
+  @Input()
+  mini: boolean = false;
+  open: boolean = false;
+  @Input()
+  public commande: any = {};
+
+  @Input()
+  public label!: string;
+
+  @Output()
+  newItemEvent = new EventEmitter<string>();
+  addNewItem() {
+    this.newItemEvent.emit('value');
+  }
 
   constructor() { }
 
   ngOnInit(): void {
+    // this.fakeInit()
   }
-
 }

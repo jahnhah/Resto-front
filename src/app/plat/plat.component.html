@@ -1,16 +1,18 @@
-<div class="card mb-3 shadow">
+<div class="card mb-3">
     <div class="card-body">
         <div class="row">
             <div class="col-3">
                 <div style="background-image: url('../../assets/bg1.jpg');" class="photo shadow-lg"></div>
-                
+
             </div>
             <div class="col-6 middle text-center">
-                <h4>Hamburger</h4>
-                <p class="prix">Ar 3333.66</p>
+                <h4>{{plat.nom}}</h4>
+                <p class="prix">{{plat.prix}}Ar</p>
+                <p *ngIf="show_restaurant">{{plat.restaurant.nom}}</p>
             </div>
             <div class="col-3 h-100">
-                <button class="btn btn-primary right">panniers</button>
+                <button class="btn btn-primary right"><img width="30" #ico src="../../assets/shopping-cart.png"
+                        (click)="evokeEvent()"></button>
             </div>
         </div>
     </div>

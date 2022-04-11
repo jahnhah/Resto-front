@@ -14,7 +14,14 @@ import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CpanelComponent } from './admin/cpanel/cpanel.component';
 import { CommandesComponent } from './admin/commandes/commandes.component';
-import { RpanelComponent } from './restaurant/rpanel/rpanel.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { GraphComponent } from './admin/graph/graph.component';
+import { RpanelComponent } from './resto/rpanel/rpanel.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { RestaurantPlatComponent } from './client/restaurant-plat/restaurant-plat.component';
+import { LivraisonComponent } from './livreur/livraison/livraison.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CommandeUserComponent } from './client/commande-user/commande-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +33,13 @@ import { RpanelComponent } from './restaurant/rpanel/rpanel.component';
     HomeComponent,
     CpanelComponent,
     CommandesComponent,
-    RpanelComponent
+    GraphComponent,
+    RpanelComponent,
+    NavbarComponent,
+    RestaurantPlatComponent,
+    LivraisonComponent,
+    FooterComponent,
+    CommandeUserComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +47,8 @@ import { RpanelComponent } from './restaurant/rpanel/rpanel.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    AutocompleteLibModule
   ],
   providers: [],
   bootstrap: [AppComponent],

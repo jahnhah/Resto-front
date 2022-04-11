@@ -1,7 +1,9 @@
 <div class="container-fluid fh-container">
     <div class="row card py-3 px-5 login-card shadows" style="height: 100%;">
         <div class="card-body">
-          <button class="logo"><h2 class="text-primary">{{actual_step}}</h2></button>
+            <button class="logo">
+                <h2 class="text-primary">{{actual_step}}</h2>
+            </button>
             <form class="centered" [formGroup]="registerGroup">
                 <div class="group-input">
                     <div class="step_1" [ngClass]="actual_step != 1 ? 'hide' : ''">
@@ -9,67 +11,88 @@
                             <p class="text-center">Vos informations</p>
                         </div>
                         <div class="form-group my-3 center">
-                            <small class="error" *ngIf="registerGroup.get('email')?.errors && registerGroup.get('email')?.dirty">*email invalide</small>
-                            <input type="email" class="form-control rounded-input" placeholder="Votre email" formControlName="email">
+                            <small class="error"
+                                *ngIf="registerGroup.get('email')?.errors && registerGroup.get('email')?.dirty">*email
+                                invalide</small>
+                            <input type="email" class="form-control rounded-input" placeholder="Votre email"
+                                formControlName="email">
                         </div>
                         <div class="form-group my-3 center">
-                            <small class="error" *ngIf="registerGroup.get('nom')?.errors && registerGroup.get('nom')?.dirty">*nom requis</small>
-                            <input type="email" class="form-control rounded-input" placeholder="Votre nom" formControlName="nom">
+                            <small class="error"
+                                *ngIf="registerGroup.get('nom')?.errors && registerGroup.get('nom')?.dirty">*nom
+                                requis</small>
+                            <input type="email" class="form-control rounded-input" placeholder="Votre nom"
+                                formControlName="nom">
                         </div>
                     </div>
-    
+
                     <div class="step_2" [ngClass]="actual_step != 2 ? 'hide' : ''">
                         <div class="form-group my-3 center">
                             <p class="text-center">{{ user.type?'Votre status est':'Vous etes?'}}</p>
                         </div>
                         <div class="row ">
                             <div class="col-4 text-center">
-                                <img src="../../assets/client.png" class="type" [ngClass]="user.type=='client'?'grow':''" width="50px" (click)="set_type('client')">
-                                <p class="text-center" >Client</p>
+                                <img src="../../assets/client.png" class="type"
+                                    [ngClass]="user.type=='client'?'grow':''" width="50px"
+                                    (click)="set_type('utilisateur')">
+                                <p class="text-center">Client</p>
                             </div>
                             <div class="col-4 text-center">
-                                <img src="../../assets/restaurant.png" class="type" [ngClass]="user.type=='restaurant'?'grow':''" width="50px" (click)="set_type('restaurant')">
+                                <img src="../../assets/restaurant.png" class="type"
+                                    [ngClass]="user.type=='restaurant'?'grow':''" width="50px"
+                                    (click)="set_type('restaurant')">
                                 <p class="text-center">Resto</p>
                             </div>
                             <div class="col-4 text-center">
-                                <img src="../../assets/livreur.png" class="type" [ngClass]="user.type=='livreur'?'grow':''" width="50px" (click)="set_type('livreur')">
+                                <img src="../../assets/livreur.png" class="type"
+                                    [ngClass]="user.type=='livreur'?'grow':''" width="50px"
+                                    (click)="set_type('livreur')">
                                 <p class="text-center">Livreur</p>
                                 <i class="bi bi-arrow-90deg-right"></i>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="step_3" [ngClass]="actual_step != 3 ? 'hide' : ''">
                         <div class="form-group my-3 center">
                             <p class="text-center">Creer un mot de passe</p>
                         </div>
-                        <div class="form-group my-3 center" >
-                            <small class="error" *ngIf="registerGroup.get('pwd')?.dirty && registerGroup.get('pwd')?.errors">*trop faible</small>
-                            <input type="password" class="form-control rounded-input" placeholder="Mot de passe" formControlName="pwd">
+                        <div class="form-group my-3 center">
+                            <small class="error"
+                                *ngIf="registerGroup.get('pwd')?.dirty && registerGroup.get('pwd')?.errors">*trop
+                                faible</small>
+                            <input type="password" class="form-control rounded-input" placeholder="Mot de passe"
+                                formControlName="pwd">
                         </div>
                         <div class="form-group my-3 center">
-                            <small class="error" *ngIf="registerGroup.hasError('passwordMatch') && registerGroup.get('pwd')?.dirty">*ne correspond pas</small>
-                            <input type="password" class="form-control rounded-input" placeholder="Confirmer" formControlName="pwdc">
+                            <small class="error"
+                                *ngIf="registerGroup.hasError('passwordMatch') && registerGroup.get('pwd')?.dirty">*ne
+                                correspond pas</small>
+                            <input type="password" class="form-control rounded-input" placeholder="Confirmer"
+                                formControlName="pwdc">
                         </div>
                         <div class="form-group my-3 center">
                             <p class="error text-center" *ngIf="error">*{{error}}</p>
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div class="row bottom-button text-center">
-                    
+
                     <div class="col-6">
-                        <img src="../../assets/previous.png" class="action-button disable" (click)="prev_step()" aria-disabled="actual_step>1">
+                        <img src="../../assets/previous.png" class="action-button disable" (click)="prev_step()"
+                            aria-disabled="actual_step>1">
                     </div>
                     <div class="col-6">
-                        <img src="../../assets/next.png" class="action-button" (click)="next_step()" *ngIf="actual_step<3">
-                        <img src="../../assets/valid.png" class="action-button" (click)="valider()" *ngIf="actual_step==3">
+                        <img src="../../assets/next.png" class="action-button" (click)="next_step()"
+                            *ngIf="actual_step<3">
+                        <img src="../../assets/valid.png" class="action-button" (click)="valider()"
+                            *ngIf="actual_step==3">
                     </div>
-                    
+
                 </div>
-                
+
             </form>
         </div>
     </div>
