@@ -1,12 +1,13 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-app.use(express.static(__dirname + '/dist/i-kali'));
+app.use(express.static(__dirname + '/dist/front'));
 
 
 app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname + '/dist/i-kali/index.html'));
+    res.sendFile(path.join(__dirname + '/dist/front/index.html'));
 });
 
-
-app.listen(process.env.PORT || 80);
+const PORT = process.env.PORT || 80
+app.listen(PORT);
+console.log('app listen on ' + PORT)
