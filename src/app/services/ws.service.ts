@@ -12,7 +12,7 @@ const httpOptions = {
   )
 };
 // const base_url = 'http://localhost:9000';
-const base_url = 'https://ekaly-back.herokuapp.com/';
+const base_url = 'https://ekaly-back.herokuapp.com';
 @Injectable({
   providedIn: 'root'
 })
