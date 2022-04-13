@@ -14,6 +14,9 @@ export class PanierComponent implements OnInit {
   input: Array<number> = [];
   name: Array<string> = [];
   date!: Date;
+  toast = false;
+  total = 0
+  toast_text = ''
 
   constructor(private ws: WsService, private modalService: NgbModal, private router: Router) {
 
@@ -22,6 +25,7 @@ export class PanierComponent implements OnInit {
   ngOnInit(): void {
     this.loadPanier();
     this.initName();
+    this.calcul_total()
   }
 
   initName() {
@@ -31,8 +35,16 @@ export class PanierComponent implements OnInit {
     }
   }
 
-  calculer_st(event: any, prix: number) {
-    return event.value * prix;
+  calcul_total() {
+    for (var i = 0; i < this.paniers.length; i++) {
+      this.paniers[i].sommme = this.paniers[i].prix * this.paniers[i].nb;
+      this.total += this.paniers[i].sommme
+    }
+  }
+  calculer_st(event: any, index: number) {
+    this.total = 0;
+    this.paniers[index].nb = event.target.value
+    this.calcul_total()
   }
 
   loadPanier() {
@@ -59,6 +71,8 @@ export class PanierComponent implements OnInit {
       this.paniers[i].nb = this.input[i];
     }
     localStorage.setItem('panier', JSON.stringify(this.paniers));
+    this.toast_text = 'Panier sauvegardé'
+    this.toast = true
   }
   format() {
     let plats: Array<any> = [];
@@ -85,7 +99,10 @@ export class PanierComponent implements OnInit {
     };
     console.log(body)
     this.ws.createCommande(body).subscribe((data) => console.log(data));
+    this.paniers = [];
     localStorage.removeItem('panier');
+    this.modalService.dismissAll()
+    this.toast_text = 'Commander avec succès'
   }
 
 }

@@ -21,10 +21,6 @@ export class WsService {
   constructor(private http: HttpClient) {
   }
 
-  getItems(): Observable<object> {
-    return this.http.get(base_url + '/menu', httpOptions);
-  }
-
   insertUtilisateur(utilisateur: any): Observable<any> {
     return this.http.post(base_url + '/utilisateur/register', utilisateur, httpOptions)
   }

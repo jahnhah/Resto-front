@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { WsService } from '../services/ws.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   nom: string = "";
   screenWidth!: number
 
-  constructor(private ws: WsService, private modalService: NgbModal, private router: Router) {
+  constructor(private ws: WsService, private modalService: NgbModal, private router: Router, private spinner: NgxSpinnerService) {
     this.getScreenSize('')
   }
   restaurants_to_slide() {
@@ -29,29 +30,39 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loadRestaurants();
     this.loadPlats();
+    this.spinner.show();
+
   }
 
   loadRestaurants() {
+    this.spinner.show();
     this.ws.getRestaurants().subscribe((data: any) => {
       this.restaurants = data;
       this.restaurants_to_slide();
+      this.spinner.hide()
     });
   }
 
   loadPlats() {
+    this.spinner.show();
     this.ws.getPlats().subscribe((data: any) => {
       this.plats = data;
+      this.spinner.hide()
     });
   }
 
   search() {
     if (!this.nom) return
+    this.spinner.show()
     this.ws.searchPlats(this.nom).subscribe((data: any) => {
       this.plats = data;
+      this.spinner.hide();
     });
+    this.spinner.show();
     this.ws.searchRestaurants(this.nom).subscribe((data: any) => {
       this.restaurants = data;
       this.restaurants_to_slide();
+      this.spinner.hide();
     });
   }
 

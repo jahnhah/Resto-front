@@ -3,7 +3,7 @@
     <div class="row mt-5">
         <h1 *ngIf="!paniers ||paniers.length<1" class="text-center"> Panier vide</h1>
         <!-- eto le component -->
-        <div class="card mb-3" *ngFor="let t of paniers; let i=index">
+        <div class="card mb-3" *ngFor="let t of paniers; let i=index;">
             <div class="card-body shadow">
                 <div class="row">
                     <div class="col-3">
@@ -14,17 +14,22 @@
                         <h4>{{t.nom}}</h4>
                         <div class="input-group mb-3 text-center" style="justify-content: center;">
                             <input type="number" [(ngModel)]="input[i]" [name]="name[i]" class="number shadow my-3"
-                                [value]="t.nb">
+                                [value]="t.nb" (keyup)="calculer_st($event,i)" min="1">
                         </div>
                     </div>
-                    <div class="col-3 h-100">
+                    <div class=" col-3 h-100">
                         <div class="right d-inline">
                             <button class="btn btn-primary close" (click)="removeFromPanier(t._id)">X</button>
-                            <p class="my-3">{{t.prix}} Ar</p>
+                            <p class="my-3">{{t.somme||t.prix*t.nb}} Ar</p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row text-center my-3" *ngIf="paniers && paniers.length>0">
+        <div class="col">
+            <h4 style="color: cadetblue; text-align: right;">Total: <span>{{total}} </span>Ar</h4>
         </div>
     </div>
     <div class="row text-center my-5" *ngIf="paniers && paniers.length>0">
@@ -52,3 +57,8 @@
         <button class="btn btn-primary" (click)="commander()">Commander</button>
     </div>
 </ng-template>
+
+<ngb-toast [delay]="2000" style="background-color: cadetblue;" [style]="'position:absolute;right:0px;top:50%'"
+    *ngIf="toast">
+    <p class="text-center text-white">{{toast_text}}</p>
+</ngb-toast>

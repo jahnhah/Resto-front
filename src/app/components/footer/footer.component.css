@@ -20,21 +20,21 @@ footer {
 
 .search-append {
     border-radius: 0px 10px 10px 0px;
-    background-color: cornflowerblue !important;
+    background-color: #3d6c6d !important;
     border: none;
     color: white;
 }
 
 .search-append:focus {
     box-shadow: none !important;
-    background-color: cornflowerblue !important;
+    background-color: #3d6c6d !important;
 
 
 }
 
 .group {
     border-radius: 10px 10px 10px 10px;
-    max-width: 30%;
+    max-width: 300px;
     margin-top: 20px;
     margin-bottom: 20px;
 }

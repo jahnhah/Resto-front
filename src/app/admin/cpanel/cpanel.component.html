@@ -5,14 +5,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse text-center" id="navbarTogglerDemo01">
-      <a class="navbar-brand my-1" href="#"><img src="../../assets/logo.png" class="my-2 logo" width="50px"></a>
+      <a class="navbar-brand my-1" [routerLink]="['/']"><img src="../../assets/logo.png" class="my-2 logo"
+          width="50px"></a>
       <ul class="navbar-nav my-1 mb-lg-0  me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Commandes</a>
-        </li>
+
       </ul>
 
-      <img src="../../assets/bg1.jpg" class="photo my-1">
+      <img src="../../assets/bg1.jpg" [routerLink]="['/login']" class="photo my-1" style="cursor: pointer;">
     </div>
   </div>
 </nav>
@@ -90,3 +89,8 @@
     <button type="button" class="btn btn-primary" (click)="save()">OK</button>
   </div>
 </ng-template>
+
+<ngb-toast [delay]="2000" style="background-color: cadetblue;" [style]="'position:absolute;right:0px;top:50%'"
+  *ngIf="toast">
+  <p class="text-center text-white">{{toast_text}}</p>
+</ngb-toast>
