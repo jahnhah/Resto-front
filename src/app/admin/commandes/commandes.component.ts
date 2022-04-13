@@ -13,6 +13,9 @@ export class CommandesComponent implements OnInit {
   public commande: any = {};
 
   @Input()
+  profile: boolean = true
+
+  @Input()
   public label!: string;
 
   @Output()

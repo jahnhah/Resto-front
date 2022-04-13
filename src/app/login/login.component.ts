@@ -27,16 +27,18 @@ export class LoginComponent implements OnInit {
 
   async login() {
     let type = '';
-    let data = await this.ws.login(this.logins).toPromise()
-    this.ws.saveToken(data.token);
-    type = data.type;
-    localStorage.setItem('type', type);
-    this.error = ''
+    this.ws.login(this.logins).subscribe((data: any) => {
+      this.ws.saveToken(data.token);
+      type = data.type;
+      localStorage.setItem('type', type);
+      this.error = ''
 
-    if (type == 'restaurant') this.router.navigate(['/resto/rpanel'])
-    if (type == 'admin') this.router.navigate(['/admin/cpanel'])
-    if (type == 'livreur') this.router.navigate(['/livreur/lpanel'])
-    if (type == 'utilisateur') this.router.navigate(['/'])
+      if (type == 'restaurant') this.router.navigate(['/resto/rpanel']).then(() => window.location.reload())
+      if (type == 'admin') this.router.navigate(['/admin/cpanel']).then(() => window.location.reload())
+      if (type == 'livreur') this.router.navigate(['/livreur/lpanel']).then(() => window.location.reload())
+      if (type == 'utilisateur') this.router.navigate(['/']).then(() => window.location.reload())
+    }, (err) => this.error = err)
+
   }
 
 }

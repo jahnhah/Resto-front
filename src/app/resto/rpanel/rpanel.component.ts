@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService, Spinner } from 'ngx-spinner';
+import { Observable } from 'rxjs';
 import { WsService } from 'src/app/services/ws.service';
 
 @Component({
@@ -10,16 +12,13 @@ import { WsService } from 'src/app/services/ws.service';
 })
 export class RpanelComponent implements OnInit {
   items = [{
-    label: 'home',
-    url: '/',
-    event: ''
-  }, {
     label: 'Ajout plat',
     url: '',
     event: 'modal_plat'
   }];
   modal_text = { title: 'Ajout Plat', button: 'Ajouter' };
-
+  toast: boolean = false;
+  toast_text = 'Ajout succes'
   restaurant: any;
   plats: Array<any> = [];
   plat_model: { _id: string, nom: string, prix: number, restaurant: string } = { _id: '', nom: '', prix: 0, restaurant: '' };
@@ -30,7 +29,7 @@ export class RpanelComponent implements OnInit {
 
   selectedFile!: File
 
-  constructor(private modalService: NgbModal, private ws: WsService, private router: Router) {
+  constructor(private modalService: NgbModal, private ws: WsService, private router: Router, private spinner: NgxSpinnerService) {
   }
 
 
@@ -49,20 +48,24 @@ export class RpanelComponent implements OnInit {
   }
 
   loadCommandes() {
+    this.spinner.show()
     this.ws.getCommandes().subscribe((data: any) => {
       this.commandes = data;
-      console.log(this.commandes)
+      this.spinner.hide()
     })
   }
 
 
   async loadPlats() {
+    this.spinner.show();
     this.plats = await this.ws.getPlatByResto(this.restaurant._id).toPromise();
-    console.log(this.plats);
+    this.spinner.hide()
   }
 
   async loadRestaurant() {
+    this.spinner.show();
     this.restaurant = await this.ws.getRestaurant().toPromise()
+    this.spinner.hide()
   }
 
   open(content: any) {
@@ -83,22 +86,39 @@ export class RpanelComponent implements OnInit {
   }
 
   addPlat() {
-    this.ws.addPlat(this.plat_model).subscribe((data: any) => this.plats.push(data));
+    this.ws.addPlat(this.plat_model).subscribe((data: any) => {
+      this.plats.push(data)
+      this.modalService.dismissAll();
+      this.show_toast()
+    });
   }
 
   async updatePlat() {
+    this.spinner.show()
     await this.ws.updatePlat({ plat: this.plat_model }).toPromise();
+    this.modalService.dismissAll();
     this.loadPlats();
+    this.spinner.hide();
+    this.toast_text = 'Modification succès';
+    this.show_toast();
   }
 
   async deletePlat() {
+    this.spinner.show()
     await this.ws.deletePlat(this.plat_model._id).toPromise();
+    this.modalService.dismissAll();
     this.loadPlats();
+    this.spinner.hide();
+    this.toast_text = 'Suppression succès';
+    this.show_toast();
   }
 
   updateCommande(id: string) {
+    this.spinner.show();
     let body = { id: id, etat: 'pret' }
-    this.ws.updateCommande(body).subscribe((data: any) => this.loadCommandes())
+    this.ws.updateCommande(body).subscribe((data: any) => { this.loadCommandes(); this.spinner.hide() })
+    this.toast_text = 'Modification succès';
+    this.show_toast();
   }
 
   selectEvent(item: any) {
@@ -115,6 +135,10 @@ export class RpanelComponent implements OnInit {
 
   onFileChanged(event: any) {
     this.selectedFile = event.target.files[0]
+  }
+
+  show_toast() {
+    this.toast = true
   }
 
 

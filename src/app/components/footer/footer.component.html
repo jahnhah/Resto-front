@@ -1,9 +1,24 @@
 <footer>
-    <form class="my-1 me-auto mx-auto text-center">
-        <div class="input-group group shadow mx-auto">
-            <input type="email" class="form-control search" aria-label="Amount (to the nearest dollar)"
-                placeholder="Votre email" name="mail" [(ngModel)]="mail">
-            <button class="input-group-text search-append" (click)="sendMail()">Subscribe</button>
+    <div class="row">
+        <div class="col-4">
+            <div class="text-white mx-4" style="float: left;">
+                <p>ETU 972</p>
+                <p>Jahnhah Craven Féliciano</p>
+            </div>
         </div>
-    </form>
+        <div class="col-4 text-center my-auto">
+            <h6>E-KALY 2022</h6>
+        </div>
+        <div class="col-4 my-auto">
+            <form class="me-auto mx-auto text-center">
+                <div class="input-group group shadow mx-4" style="float:right">
+                    <input type="email" class="form-control search" aria-label="Amount (to the nearest dollar)"
+                        placeholder="Votre email" name="mail" [(ngModel)]="mail">
+                    <button class="input-group-text search-append" (click)="sendMail()"
+                        [ngbPopover]="'Regasder votre boite mail !!!'">S'abonner</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </footer>

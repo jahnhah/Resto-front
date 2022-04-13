@@ -61,3 +61,8 @@
             *ngIf="modal_text.button=='Sauvegarder'">{{modal_text.button}}</button>
     </div>
 </ng-template>
+
+<ngb-toast [delay]="2000" style="background-color: cadetblue;" [style]="'position:absolute;right:0px;top:50%'"
+    *ngIf="toast">
+    <p class="text-center text-white">{{toast_text}}</p>
+</ngb-toast>

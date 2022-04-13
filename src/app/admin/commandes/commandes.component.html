@@ -1,20 +1,20 @@
 <div class="card mb-3 shadow" [ngClass]="mini?'text-mini':''">
     <div class="card-body">
         <div class="row">
-            <div class="col-3">
+            <div class="col-3" *ngIf="profile">
                 <div [ngClass]="mini?'image-mini':''" style="background-image: url('../../assets/bg1.jpg');"
                     class="photo shadow-lg"></div>
                 <div class="mt-2">
                     <p>{{commande.utilisateur.nom}}</p>
                 </div>
             </div>
-            <div class="col-6 middle text-center">
+            <div class="col-6 middle text-center" [ngClass]="!profile?'col-12':''">
                 <p>{{commande.plats.length}}</p>
                 <p>{{commande.lieu}}</p>
                 <p class="prix">{{commande.dateLivraison | date: "medium" }}</p>
 
             </div>
-            <div class="col-3 h-100">
+            <div class="col-3 h-100" *ngIf="profile">
                 <button class="btn btn-primary right" (click)="addNewItem()">{{label}}</button>
             </div>
         </div>

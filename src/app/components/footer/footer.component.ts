@@ -9,7 +9,8 @@ import { WsService } from 'src/app/services/ws.service';
 export class FooterComponent implements OnInit {
   mail!: string
   constructor(private ws: WsService) { }
-
+  toast = false;
+  toast_text = ''
   ngOnInit(): void {
   }
 

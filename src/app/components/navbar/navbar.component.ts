@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
 
   }
   constructor(private router: Router, private ws: WsService) {
-    this.items = [{ label: 'login', url: 'login', event: '' }, { label: 'register', url: 'register', event: '' }, { label: 'commandes', url: 'commandes', event: '' }]
+    this.items = [{ label: 'login', url: 'login', event: '' }, { label: 'register', url: 'register', event: '' }]
   }
 
   logout() {

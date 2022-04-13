@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { debounceTime, distinctUntilChanged, map, Observable, OperatorFunction } from 'rxjs';
 import { WsService } from 'src/app/services/ws.service';
 @Component({
@@ -18,11 +19,13 @@ export class CpanelComponent implements OnInit {
   commandes: Array<any> = [];
   toDeliver: Array<any> = [];
   livreur: any;
+  toast = false;
+  toast_text = '';
 
   @ViewChild('content')
   modal!: ElementRef
 
-  constructor(private modalService: NgbModal, private ws: WsService, private router: Router) {
+  constructor(private modalService: NgbModal, private ws: WsService, private router: Router, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -53,16 +56,18 @@ export class CpanelComponent implements OnInit {
   }
 
   loadLivreur() {
+    this.spinner.show();
     this.ws.getLivreurs().subscribe((data: any) => {
       this.livreurs = data;
-      console.log(data)
+      this.spinner.hide();
     })
   }
 
   loadCommandes() {
+    this.spinner.show();
     this.ws.getCommandes().subscribe((data: any) => {
       this.commandes = data;
-      console.log(data)
+      this.spinner.hide();
     })
   }
 
@@ -97,7 +102,9 @@ export class CpanelComponent implements OnInit {
     await this.ws.createLivraison(body).toPromise();
     await this.ws.bulkUpdateCommande({ commandes: c_id }).toPromise();
     this.loadCommandes();
-
+    this.modalService.dismissAll();
+    this.toast_text = 'Ajouté au livreurs!'
+    this.toast = true;
     this.toDeliver = [];
   }
 }

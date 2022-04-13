@@ -22,6 +22,9 @@ import { RestaurantPlatComponent } from './client/restaurant-plat/restaurant-pla
 import { LivraisonComponent } from './livreur/livraison/livraison.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CommandeUserComponent } from './client/commande-user/commande-user.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,13 +45,15 @@ import { CommandeUserComponent } from './client/commande-user/commande-user.comp
     CommandeUserComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
     NgbModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
