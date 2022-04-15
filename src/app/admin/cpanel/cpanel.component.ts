@@ -21,6 +21,8 @@ export class CpanelComponent implements OnInit {
   livreur: any;
   toast = false;
   toast_text = '';
+  benefice!: Array<any>
+  resto_id = '';
 
   @ViewChild('content')
   modal!: ElementRef
@@ -28,13 +30,17 @@ export class CpanelComponent implements OnInit {
   constructor(private modalService: NgbModal, private ws: WsService, private router: Router, private spinner: NgxSpinnerService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     if (localStorage.getItem('type') != 'admin') {
       this.router.navigate(['/login'])
     }
     this.loadLivreur();
     this.loadCommandes();
-    this.loadRestaurant();
+    await this.loadRestaurant();
+    if (this.restaurants[0]) {
+      this.loadBenefice(this.restaurants[0]._id)
+    }
+
   }
 
   closeResult = '';
@@ -47,8 +53,8 @@ export class CpanelComponent implements OnInit {
       })
   }
 
-  loadRestaurant() {
-    this.ws.getRestaurants().subscribe((data: any) => this.restaurants = data)
+  async loadRestaurant() {
+    this.restaurants = await this.ws.getRestaurants().toPromise()
   }
 
   selectEvent(item: any) {
@@ -73,8 +79,8 @@ export class CpanelComponent implements OnInit {
 
 
 
-  restoEvent() {
-    console.log(this.restaurant);
+  restoEvent(event: any) {
+    this.loadBenefice(event.target.value)
   }
 
   dateEvent() {
@@ -91,6 +97,10 @@ export class CpanelComponent implements OnInit {
   removeDeliver(id: string) {
     let index = this.toDeliver.findIndex(x => x._id == id);
     this.toDeliver.splice(index, 1);
+  }
+
+  loadBenefice(id: string) {
+    this.ws.getBenefice(id).subscribe((data) => this.benefice = data)
   }
 
   async save() {

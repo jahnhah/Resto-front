@@ -26,6 +26,7 @@ export class RpanelComponent implements OnInit {
   livreurs: Array<any> = [];
   closeResult = '';
   keyword = 'nom';
+  benefice!: Array<any>
 
   selectedFile!: File
 
@@ -42,6 +43,7 @@ export class RpanelComponent implements OnInit {
     if (this.restaurant != null) {
       this.plat_model.restaurant = this.restaurant._id;
       this.loadPlats();
+      this.loadBenefice()
     }
 
 
@@ -67,7 +69,9 @@ export class RpanelComponent implements OnInit {
     this.restaurant = await this.ws.getRestaurant().toPromise()
     this.spinner.hide()
   }
-
+  async loadBenefice() {
+    this.ws.getBenefice(this.restaurant._id).subscribe((data) => this.benefice = [...data])
+  }
   open(content: any) {
     this.modal_text = { title: 'Ajout Plat', button: 'Ajouter' };
     this.plat_model = { _id: '', nom: '', prix: 0, restaurant: this.restaurant._id };

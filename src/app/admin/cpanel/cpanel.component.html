@@ -20,7 +20,7 @@
     <div class="col-md-9 mb-4">
       <div class="card shadow">
         <div class="card-body">
-          <app-graph></app-graph>
+          <app-graph [inputs]="benefice"></app-graph>
         </div>
       </div>
     </div>
@@ -29,17 +29,9 @@
         <div class="card-body">
           <form>
             <div class="form-group">
-              <select name="restaurant" class="form-control" [(ngModel)]="restaurant" (change)="restoEvent()">
+              <select name="restaurant" class="form-control" [(ngModel)]="restaurant" (change)="restoEvent($event)">
                 <option *ngFor="let r of restaurants" [value]="r._id">{{ r.nom }}</option>
               </select>
-            </div>
-            <div class="form-group mt-3">
-              <div class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Mois</span>
-                </div>
-                <input type="month" name="date" [(ngModel)]="date" class="form-control" (change)="dateEvent()">
-              </div>
             </div>
           </form>
         </div>
