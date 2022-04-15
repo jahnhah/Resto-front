@@ -115,4 +115,8 @@ export class WsService {
     return this.http.post(base_url + '/utilisateur/newsletter', body, httpOptions)
   }
 
+  getBenefice(restaurant: string): Observable<any> {
+    return this.http.get(base_url + '/commande/agregate?restaurant=' + restaurant, httpOptions)
+  }
+
 }
