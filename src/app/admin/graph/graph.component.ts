@@ -1,8 +1,6 @@
 import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Chart, Point, registerables } from "chart.js";
 import { WsService } from 'src/app/services/ws.service';
-import 'chartjs-adapter-date-fns'
-import { min } from 'rxjs';
 Chart.register(...registerables);
 @Component({
   selector: 'app-graph',
